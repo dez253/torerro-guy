@@ -1,0 +1,72 @@
+-- Active: 1696254251758@@127.0.0.1@3306
+CREATE DATABASE Muana_Hotel;
+USE Muana_Hotel;
+
+-- Create guest table
+CREATE TABLE guest (
+    guest_no INT PRIMARY KEY NOT NULL,
+    name VARCHAR(15) NOT NULL,
+    gender VARCHAR(15) NOT NULL,
+    status VARCHAR(15) NOT NULL,
+    roomid VARCHAR(15) NOT NULL
+);
+
+-- Create room table
+CREATE TABLE room (
+    room_id VARCHAR(15) PRIMARY KEY NOT NULL,
+    roomname VARCHAR(15) NOT NULL,
+    room_type VARCHAR(15) NOT NULL,
+    Date VARCHAR(15) NOT NULL,
+    price INT NOT NULL,
+    food VARCHAR(15) -- Added the 'food' column
+);
+
+-- Create stock table
+CREATE TABLE stock (
+    item_id VARCHAR(15) PRIMARY KEY NOT NULL,
+    item_name VARCHAR(15),
+    Quantity INT NOT NULL
+);
+
+-- Create service table
+CREATE TABLE service (
+    service_id VARCHAR(15) PRIMARY KEY NOT NULL,
+    service_name VARCHAR(15) NOT NULL,
+    types VARCHAR(15) NOT NULL,
+    time INT NOT NULL,
+    employ_id VARCHAR(15) NOT NULL,
+    FOREIGN KEY (employ_id) REFERENCES employee(employ_id) -- Added the foreign key constraint
+);
+
+-- Create employee table
+CREATE TABLE employee (
+    employ_id VARCHAR(15) PRIMARY KEY NOT NULL,
+    name VARCHAR(15) NOT NULL,
+    address VARCHAR(15) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(15) NOT NULL
+);
+
+-- Insert data into tables
+-- (Your existing INSERT statements remain unchanged)
+
+-- Alter room table to add the 'food' column
+ALTER TABLE room
+ADD COLUMN food VARCHAR(15);
+
+-- Update room table to set 'food' column values
+UPDATE room
+SET food = 'maize';
+
+-- Making queries via SELECT
+SELECT employ_id, name FROM employee;
+
+-- Making queries via view
+CREATE VIEW view1 AS 
+SELECT * FROM guest
+WHERE name = 'Tuza';
+
+SELECT * FROM view1;
+
+-- Display the content of the 'stock' table
+SELECT * FROM stock;
