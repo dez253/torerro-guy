@@ -1,0 +1,74 @@
+-- Active: 1696254251758@@127.0.0.1@3306
+CREATE DATABASE Muana_Hotel;
+use Muana_Hotel;
+create table guest(guest_no int primary key not null,name varchar(15) not null,gender varchar(15) not null,status varchar(15) not null,roomid varchar(15) not null);
+create table room(room_id varchar(15) primary key not null,roomname varchar(15) not null,room_type varchar(15) not null,Date varchar(15) not null,price int not null);
+create table stock(item_id varchar(15) primary key not null,item_name varchar(15),Quantity int not null);
+create table service(service_id varchar(15) primary key not null,service_name varchar(15) not null,types varchar(15) not null,time int not null,employ_id varchar(15) not null);
+create table employee(employ_id varchar(15) primary key not null,name varchar(15) not null,address varchar(15)not null,age int not null,gender varchar(15) not null);
+ALTER TABLE service
+ADD CONSTRAINT FOREIGN KEY(employ_id)
+REFERENCES employee(employ_id);
+use Muana_Hotel;
+INSERT INTO guest (guest_no, name, gender, status, roomid)
+VALUES
+(11, 'Chango Pike', 'Female', 'Checked In', '101'),
+(12, 'Chris Baraka', 'Male', 'Checked In', '102'),
+(13, 'Eva Mwiza', 'Female', 'Checked Out', '103'),
+(14, 'Tuza Dorothy', 'Male', 'Checked In', '104'),
+(15, 'Sophia Namara', 'Female', 'Checked Out', '105'),
+(16, 'Daniel Mwebeza', 'Male', 'Checked In', '106'),
+(17, 'Olivia Mutoni', 'Female', 'Checked Out', '107');
+INSERT INTO room (room_id, roomname, room_type, Date, price) 
+VALUES
+('103', 'Suite', 'Single', '2023-01-03', 200),
+('104', 'Executive Suite', 'Double', '2023-01-04', 250),
+('105', 'Standard Room', 'Single', '2023-01-05', 100),
+('106', 'Deluxe Room', 'Double', '2023-01-06', 150),
+('107', 'Suite', 'Single', '2023-01-07', 200),
+('108', 'Executive Suite', 'Double', '2023-01-08', 250),
+('109', 'Standard Room', 'Single', '2023-01-09', 100);
+INSERT INTO stock (item_id, item_name, Quantity) 
+VALUES
+('1003', 'Pillows', 20),
+('1004', 'Blankets', 25),
+('1005', 'Toothbrushes', 40),
+('1006', 'Shampoo', 35),
+('1007', 'Soap', 50),
+('1008', 'Tissues', 30),
+('1009', 'Slippers', 15);
+INSERT INTO service (service_id, service_name, types, time, employ_id) 
+VALUES
+('2003', 'Maintenance', 'General', 3, 'E003'),
+('2004', 'Catering', 'Food', 2, 'E004'),
+('2005', 'Security', 'Security', 4, 'E005'),
+('2006', 'Customer', 'Customer', 1, 'E006'),
+('2007', 'Transport', 'Transport', 2, 'E007'),
+('2008', 'House', 'Cleaning', 2, 'E008'),
+('2009', 'RoomServ', 'Service', 1, 'E009');
+INSERT INTO employee (employ_id, name, address, age, gender)
+VALUES
+('E003', 'Deo Lino', '789 Sala St', 30, 'Male'),
+('E004', 'Eva Mwiza', '890 Gul St', 28, 'Female'),
+('E005', 'Tuza Dorothy', '901 Bugj St', 35, 'Male'),
+('E006', 'Sophie Namara', '100 Muk St', 32, 'Female'),
+('E007', 'Chris Okello', '1100 Kamp St', 40, 'Male'),
+('E008', 'Emma Tumwine', '1200 Bugo St', 25, 'Female'),
+('E009', 'Jason Amanya', '1300 Dunb St', 28, 'Male');
+select *from stock;
+-- making queries via select
+select employ_id, name from employee;
+
+-- making queries via view
+create view view1 as 
+select *from guest
+where name= 'Tuza';
+
+select *from view1;
+
+alter TABLE Room
+add column food varchar(15);
+
+update room
+set food = 'maize';
+
